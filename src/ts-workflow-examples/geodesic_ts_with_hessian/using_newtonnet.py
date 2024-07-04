@@ -52,7 +52,7 @@ def main():
 
     try:
         # Create TS job with custom Hessian
-        job2 = ts_job(job1.output['neb_results']['highest_e_atoms'], use_custom_hessian=True, **calc_kwargs2)
+        job2 = ts_job(job1.output['highest_e_atoms'], use_custom_hessian=True, **calc_kwargs2)
         job2.update_metadata({"tag": f'ts_hess_{TAG}'})
         logger.info("Created TS job with custom Hessian.")
     except Exception as e:
