@@ -10,7 +10,7 @@ So, you have an idea for your own Python package. The first thing you'll need to
 
 ## Making a Repository
 
-With a nice name in mind, [create a new repository](https://github.com/new?template_name=template&template_owner=Quantum-Accelerators) using this template. Give it a name, a description, and decide if you want it to be public or private.
+With a nice name in mind, [create a new repository](https://github.com/new?ts-workflow examples_name=ts-workflow examples&ts-workflow examples_owner=Quantum-Accelerators) using this ts-workflow examples. Give it a name, a description, and decide if you want it to be public or private.
 
 ![](../media/create_a_repo.png)
 
