@@ -6,7 +6,7 @@ from quacc.recipes.newtonnet.ts import ts_job, irc_job, neb_job
 import jobflow as jf
 
 # Load configuration from TOML file
-config = toml.load('config.toml')
+config = toml.load('inputs_using_newtonnet.toml')
 
 # Constants from TOML file
 INPUTS_DIR = config['paths']['inputs_dir']
