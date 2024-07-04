@@ -9,8 +9,8 @@ import jobflow as jf
 config = toml.load('inputs_using_newtonnet.toml')
 
 # Constants from TOML file
-REACTANT_XYZ_FILE = config['paths']['REACTANT']
-PRODUCT_XYZ_FILE = config['paths']['PRODUCT']
+REACTANT_XYZ_FILE = config['paths']['reactant']
+PRODUCT_XYZ_FILE = config['paths']['product']
 MODEL_PATH = config['paths']['model_path']
 SETTINGS_PATH = config['paths']['settings_path']
 LAUNCHPAD_FILE = config['paths']['launchpad_file']
