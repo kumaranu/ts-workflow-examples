@@ -9,7 +9,8 @@ import jobflow as jf
 config = toml.load('inputs_using_newtonnet.toml')
 
 # Constants from TOML file
-INPUTS_DIR = config['paths']['inputs_dir']
+REACTANT_XYZ_FILE = config['paths']['REACTANT']
+PRODUCT_XYZ_FILE = config['paths']['PRODUCT']
 MODEL_PATH = config['paths']['model_path']
 SETTINGS_PATH = config['paths']['settings_path']
 LAUNCHPAD_FILE = config['paths']['launchpad_file']
@@ -34,8 +35,8 @@ calc_kwargs2 = {
 def main():
     try:
         # Read reactant and product structures
-        reactant = read(os.path.join(INPUTS_DIR, 'R.xyz'))
-        product = read(os.path.join(INPUTS_DIR, 'P.xyz'))
+        reactant = read(REACTANT_XYZ_FILE)
+        product = read(PRODUCT_XYZ_FILE)
         logger.info("Successfully read reactant and product structures.")
     except Exception as e:
         logger.error(f"Error reading reactant and product structures: {e}")
