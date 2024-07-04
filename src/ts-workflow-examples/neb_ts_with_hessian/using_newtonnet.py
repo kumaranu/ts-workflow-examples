@@ -13,7 +13,6 @@ REACTANT_XYZ_FILE = config['paths']['reactant']
 PRODUCT_XYZ_FILE = config['paths']['product']
 MODEL_PATH = config['paths']['model_path']
 SETTINGS_PATH = config['paths']['settings_path']
-LAUNCHPAD_FILE = config['paths']['launchpad_file']
 TAG = config['run']['tag']
 
 # Setup logging
