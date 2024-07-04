@@ -25,11 +25,6 @@ calc_kwargs1 = {
     'settings_path': SETTINGS_PATH,
     'hess_method': None,
 }
-calc_kwargs2 = {
-    'model_path': MODEL_PATH,
-    'settings_path': SETTINGS_PATH,
-    'hess_method': 'autograd',
-}
 
 def main():
     try:
@@ -52,9 +47,9 @@ def main():
 
     try:
         # Create TS job with custom Hessian
-        job2 = ts_job(job1.output['highest_e_atoms'], use_custom_hessian=True, **calc_kwargs2)
-        job2.update_metadata({"tag": f'ts_hess_{TAG}'})
-        logger.info("Created TS job with custom Hessian.")
+        job2 = ts_job(job1.output['highest_e_atoms'], use_custom_hessian=True, **calc_kwargs1)
+        job2.update_metadata({"tag": f'ts_no_hess_{TAG}'})
+        logger.info("Created TS job without custom Hessian.")
     except Exception as e:
         logger.error(f"Error creating TS job: {e}")
         return
@@ -62,7 +57,7 @@ def main():
     try:
         # Create IRC job in forward direction
         job3 = irc_job(job2.output['atoms'], direction='forward', **calc_kwargs1)
-        job3.update_metadata({"tag": f'ircf_hess_{TAG}'})
+        job3.update_metadata({"tag": f'ircf_no_hess_{TAG}'})
         logger.info("Created IRC job in forward direction.")
     except Exception as e:
         logger.error(f"Error creating IRC job in forward direction: {e}")
@@ -71,7 +66,7 @@ def main():
     try:
         # Create IRC job in reverse direction
         job4 = irc_job(job2.output['atoms'], direction='reverse', **calc_kwargs1)
-        job4.update_metadata({"tag": f'ircr_hess_{TAG}'})
+        job4.update_metadata({"tag": f'ircr_no_hess_{TAG}'})
         logger.info("Created IRC job in reverse direction.")
     except Exception as e:
         logger.error(f"Error creating IRC job in reverse direction: {e}")
