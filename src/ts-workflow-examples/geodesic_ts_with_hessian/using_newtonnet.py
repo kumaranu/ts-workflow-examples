@@ -2,7 +2,7 @@ import os
 import logging
 import toml
 from ase.io import read
-from quacc.recipes.newtonnet.ts import ts_job, irc_job, neb_job
+from quacc.recipes.newtonnet.ts import ts_job, irc_job, geodesic_job
 import jobflow as jf
 
 # Load configuration from TOML file
@@ -43,11 +43,11 @@ def main():
 
     try:
         # Create NEB job
-        job1 = neb_job(reactant, product, calc_kwargs=calc_kwargs1)
-        job1.update_metadata({"tag": f'neb_{TAG}'})
-        logger.info("Created NEB job.")
+        job1 = geodesic_job(reactant, product, calc_kwargs=calc_kwargs1)
+        job1.update_metadata({"tag": f'geodesic_{TAG}'})
+        logger.info("Created Geodesic job.")
     except Exception as e:
-        logger.error(f"Error creating NEB job: {e}")
+        logger.error(f"Error creating Geodesic job: {e}")
         return
 
     try:
