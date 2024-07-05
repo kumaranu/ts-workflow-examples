@@ -1,18 +1,15 @@
-import os
 import logging
 import toml
 from ase.io import read
-from quacc.recipes.newtonnet.ts import ts_job, irc_job, geodesic_job
+from quacc.recipes.mace.ts import ts_job, irc_job, geodesic_job
 import jobflow as jf
 
 # Load configuration from TOML file
-config = toml.load('inputs_using_newtonnet.toml')
+config = toml.load('inputs_using_mace.toml')
 
 # Constants from TOML file
 REACTANT_XYZ_FILE = config['paths']['reactant']
 PRODUCT_XYZ_FILE = config['paths']['product']
-MODEL_PATH = config['paths']['model_path']
-SETTINGS_PATH = config['paths']['settings_path']
 TAG = config['run']['tag']
 
 # Setup logging
@@ -20,15 +17,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Calculation and optimization keyword arguments
-calc_kwargs1 = {
-    'model_path': MODEL_PATH,
-    'settings_path': SETTINGS_PATH,
-    'hess_method': None,
-}
-calc_kwargs2 = {
-    'model_path': MODEL_PATH,
-    'settings_path': SETTINGS_PATH,
-    'hess_method': 'autograd',
+calc_kwargs = {
 }
 
 def main():
@@ -43,7 +32,7 @@ def main():
 
     try:
         # Create NEB job
-        job1 = geodesic_job(reactant, product, calc_kwargs=calc_kwargs1)
+        job1 = geodesic_job(reactant, product, calc_kwargs=calc_kwargs)
         job1.update_metadata({"tag": f'geodesic_{TAG}'})
         logger.info("Created Geodesic job.")
     except Exception as e:
@@ -52,7 +41,7 @@ def main():
 
     try:
         # Create TS job with custom Hessian
-        job2 = ts_job(job1.output['highest_e_atoms'], use_custom_hessian=True, **calc_kwargs2)
+        job2 = ts_job(job1.output['highest_e_atoms'], use_custom_hessian=True, **calc_kwargs)
         job2.update_metadata({"tag": f'ts_hess_{TAG}'})
         logger.info("Created TS job with custom Hessian.")
     except Exception as e:
@@ -61,7 +50,7 @@ def main():
 
     try:
         # Create IRC job in forward direction
-        job3 = irc_job(job2.output['atoms'], direction='forward', **calc_kwargs1)
+        job3 = irc_job(job2.output['atoms'], direction='forward', **calc_kwargs)
         job3.update_metadata({"tag": f'ircf_hess_{TAG}'})
         logger.info("Created IRC job in forward direction.")
     except Exception as e:
@@ -70,7 +59,7 @@ def main():
 
     try:
         # Create IRC job in reverse direction
-        job4 = irc_job(job2.output['atoms'], direction='reverse', **calc_kwargs1)
+        job4 = irc_job(job2.output['atoms'], direction='reverse', **calc_kwargs)
         job4.update_metadata({"tag": f'ircr_hess_{TAG}'})
         logger.info("Created IRC job in reverse direction.")
     except Exception as e:
