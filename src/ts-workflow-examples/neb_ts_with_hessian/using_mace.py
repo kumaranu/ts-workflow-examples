@@ -1,18 +1,15 @@
-import os
-import logging
 import toml
+import logging
 from ase.io import read
-from quacc.recipes.newtonnet.ts import ts_job, irc_job, neb_job
+from quacc.recipes.mace.ts import ts_job, irc_job, neb_job
 import jobflow as jf
 
 # Load configuration from TOML file
-config = toml.load('inputs_using_newtonnet.toml')
+config = toml.load('inputs_using_mace.toml')
 
 # Constants from TOML file
 REACTANT_XYZ_FILE = config['paths']['reactant']
 PRODUCT_XYZ_FILE = config['paths']['product']
-MODEL_PATH = config['paths']['model_path']
-SETTINGS_PATH = config['paths']['settings_path']
 TAG = config['run']['tag']
 
 # Setup logging
@@ -21,15 +18,9 @@ logger = logging.getLogger(__name__)
 
 # Calculation and optimization keyword arguments
 calc_kwargs1 = {
-    'model_path': MODEL_PATH,
-    'settings_path': SETTINGS_PATH,
     'hess_method': None,
 }
-calc_kwargs2 = {
-    'model_path': MODEL_PATH,
-    'settings_path': SETTINGS_PATH,
-    'hess_method': 'autograd',
-}
+
 
 def main():
     try:
@@ -52,7 +43,7 @@ def main():
 
     try:
         # Create TS job with custom Hessian
-        job2 = ts_job(job1.output['neb_results']['highest_e_atoms'], use_custom_hessian=True, **calc_kwargs2)
+        job2 = ts_job(job1.output['neb_results']['highest_e_atoms'], use_custom_hessian=True)
         job2.update_metadata({"tag": f'ts_hess_{TAG}'})
         logger.info("Created TS job with custom Hessian.")
     except Exception as e:
