@@ -1,0 +1,6 @@
+[paths]
+reactant = "/global/cfs/cdirs/m2834/kumaranu/molecules_kinbotprod_renamed/000_R.xyz"
+product = "/global/cfs/cdirs/m2834/kumaranu/molecules_kinbotprod_renamed/000_P.xyz"
+
+[run]
+tag = "jul1y24c"
