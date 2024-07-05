@@ -5,7 +5,7 @@ from quacc.recipes.mace.ts import ts_job, irc_job, neb_job
 import jobflow as jf
 
 # Load configuration from TOML file
-config = toml.load('inputs_using_newtonnet.toml')
+config = toml.load('inputs_using_mace.toml')
 
 # Constants from TOML file
 REACTANT_XYZ_FILE = config['paths']['reactant']
