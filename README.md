@@ -19,11 +19,53 @@ MACE:
 ### Prerequisites
 
 - Python 3.10
-- Required packages (list them)
+- Conda (for managing environments)
 
 ### Installation
 
+1. **Create and Activate Conda Environment**
+
+    Create a new Conda environment with Python 3.10:
+
+    ```bash
+    conda create -n test_env python=3.10
+    ```
+
+    Activate the newly created environment:
+
+    ```bash
+    conda activate test_env
+    ```
+
+2. **Clone the Repository and Install Dependencies**
+
+    Clone the repository from GitHub:
+
+    ```bash
+    git clone https://github.com/kumaranu/ts-workflow-examples.git
+    ```
+
+    Navigate to the cloned repository:
+
+    ```bash
+    cd ts-workflow-examples
+    ```
+
+    Install the package in editable mode:
+
+    ```bash
+    pip install -e .
+    ```
+
+    Install the additional requirements for testing:
+
+    ```bash
+    pip install -r tests/requirements.txt
+    ```
+
+## Running Example Scripts
+
+Navigate to one of the directories that contains example scripts inside the `src/ts-workflow-examples` directory. For example, to run a script from the `geodesic_ts_with_hessian` directory:
+
 ```bash
-git clone https://github.com/kumaranu/ts-workflow-examples.git
-cd ts-workflow-examples
-pip install -r requirements.txt
+cd src/ts-workflow-examples/geodesic_ts_with_hessian
