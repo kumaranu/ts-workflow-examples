@@ -1,1 +1,15 @@
 numpy==1.26.4
+git+https://github.com/THGLab/NewtonNet.git@HessianCalculator#egg=NewtonNet
+
+git+https://github.com/ACEsuit/mace.git#egg=mace_torch
+
+git+https://github.com/kumaranu/quacc.git@mace_recipe#egg=quacc
+
+geodesic-interpolate @ git+https://github.com/virtualzx-nad/geodesic-interpolate.git
+
+Sella==2.3.4
+ase==3.23.0
+jobflow==0.1.17
+jobflow-remote==0.1.2
+toml==0.10.2
+maggma==0.68.6
