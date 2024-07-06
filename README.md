@@ -69,3 +69,13 @@ Navigate to one of the directories that contains example scripts inside the `src
 
 ```bash
 cd src/ts-workflow-examples/geodesic_ts_with_hessian
+```
+
+## Run the desired script (for example, using_newtonnet.py):
+
+```bash
+
+python using_newtonnet.py
+```
+
+## Note: Ensure that you are in the correct directory as the paths inside the input files are relative. This will allow the inputs and ML-model provided with the repository to run correctly.
