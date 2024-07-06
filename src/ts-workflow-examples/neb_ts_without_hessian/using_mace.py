@@ -1,8 +1,9 @@
-import logging
 import toml
-from ase.io import read
-from quacc.recipes.mace.ts import ts_job, irc_job, neb_job
+import logging
 import jobflow as jf
+from ase.io import read
+from quacc import get_settings
+from quacc.recipes.mace.ts import ts_job, irc_job, neb_job
 
 # Load configuration from TOML file
 config = toml.load('inputs_using_mace.toml')
@@ -10,6 +11,9 @@ config = toml.load('inputs_using_mace.toml')
 # Constants from TOML file
 REACTANT_XYZ_FILE = config['paths']['reactant']
 PRODUCT_XYZ_FILE = config['paths']['product']
+
+settings = get_settings()
+settings.WORKFLOW_ENGINE = 'jobflow'
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)

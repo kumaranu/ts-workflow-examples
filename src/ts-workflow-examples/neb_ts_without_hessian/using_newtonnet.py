@@ -18,6 +18,7 @@ SETTINGS_PATH = config['paths']['settings_path']
 settings = get_settings()
 settings.NEWTONNET_MODEL_PATH = os.getcwd() + MODEL_PATH
 settings.NEWTONNET_CONFIG_PATH = os.getcwd() + SETTINGS_PATH
+settings.WORKFLOW_ENGINE = 'jobflow'
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)

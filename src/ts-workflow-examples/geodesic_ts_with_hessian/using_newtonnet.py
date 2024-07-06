@@ -23,6 +23,7 @@ logger = logging.getLogger(__name__)
 settings = get_settings()
 settings.NEWTONNET_MODEL_PATH = os.getcwd() + MODEL_PATH
 settings.NEWTONNET_CONFIG_PATH = os.getcwd() + SETTINGS_PATH
+settings.WORKFLOW_ENGINE = 'jobflow'
 
 # Calculation and optimization keyword arguments
 calc_kwargs1 = {
