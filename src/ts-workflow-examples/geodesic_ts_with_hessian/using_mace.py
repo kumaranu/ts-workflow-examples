@@ -33,33 +33,29 @@ def main():
 
     # Create NEB job
     job1 = strip_decorator(geodesic_job)(reactant, product, calc_kwargs=calc_kwargs)
-    print(job1)
-    logger.info("Created Geodesic job.")
-    '''
+    logger.info("Geodesic job done.")
+    
     # Create TS job with custom Hessian
-    job2 = ts_job(job1.output['highest_e_atoms'], use_custom_hessian=True, **calc_kwargs)
-    logger.info("Created TS job with custom Hessian.")
+    job2 = strip_decorator(ts_job)(job1['highest_e_atoms'], use_custom_hessian=True, **calc_kwargs)
+    logger.info("TS job with custom Hessian done.")
 
     # Create IRC job in forward direction
-    job3 = irc_job(job2.output['atoms'], direction='forward', **calc_kwargs)
-    logger.info("Created IRC job in forward direction.")
+    job3 = strip_decorator(irc_job)(job2['atoms'], direction='forward', **calc_kwargs)
+    logger.info("IRC job in forward direction done.")
 
     # Create IRC job in reverse direction
-    job4 = irc_job(job2.output['atoms'], direction='reverse', **calc_kwargs)
-    logger.info("Created IRC job in reverse direction.")
+    job4 = strip_decorator(irc_job)(job2['atoms'], direction='reverse', **calc_kwargs)
+    logger.info("IRC job in reverse direction done.")
 
-    # Combine jobs into a flow
-    jobs = [job1, job2, job3, job4]
-    flow = jf.Flow(jobs)
-    logger.info("Jobs combined into a flow.")
+    logger.info("All jobs executed successfully.")
 
-    # Execute the workflow locally
-    responses = jf.managers.local.run_locally(flow)
-    logger.info("Workflow executed successfully.")
-    logger.info(f"Responses: {responses}")
-    '''
+    return [job1, job2, job3, job4]
 
 
 if __name__ == "__main__":
-    main()
+    job1, job2, job3, job4 = main()
+    print('\n\n', job1)
+    print('\n\n', job2)
+    print('\n\n', job3)
+    print('\n\n', job4)
 
