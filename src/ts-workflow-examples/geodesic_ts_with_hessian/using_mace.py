@@ -32,7 +32,7 @@ def main():
     logger.info("Successfully read reactant and product structures.")
 
     # Create NEB job
-    job1 = strip_decorator(geodesic_job(reactant, product, calc_kwargs=calc_kwargs))
+    job1 = strip_decorator(geodesic_job)(reactant, product, calc_kwargs=calc_kwargs)
     print(job1)
     logger.info("Created Geodesic job.")
     '''
