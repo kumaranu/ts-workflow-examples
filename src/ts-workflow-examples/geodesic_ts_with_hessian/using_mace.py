@@ -1,9 +1,10 @@
 import toml
 import logging
-import jobflow as jf
+#import jobflow as jf
 from ase.io import read
 from quacc import get_settings
 from quacc.recipes.mace.ts import ts_job, irc_job, geodesic_job
+from quacc import strip_decorator
 
 
 # Load configuration from TOML file
@@ -31,9 +32,10 @@ def main():
     logger.info("Successfully read reactant and product structures.")
 
     # Create NEB job
-    job1 = geodesic_job(reactant, product, calc_kwargs=calc_kwargs)
+    job1 = strip_decorator(geodesic_job(reactant, product, calc_kwargs=calc_kwargs))
+    print(job1)
     logger.info("Created Geodesic job.")
-
+    '''
     # Create TS job with custom Hessian
     job2 = ts_job(job1.output['highest_e_atoms'], use_custom_hessian=True, **calc_kwargs)
     logger.info("Created TS job with custom Hessian.")
@@ -55,6 +57,7 @@ def main():
     responses = jf.managers.local.run_locally(flow)
     logger.info("Workflow executed successfully.")
     logger.info(f"Responses: {responses}")
+    '''
 
 
 if __name__ == "__main__":
