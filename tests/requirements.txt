@@ -1,4 +1,4 @@
-numpy==1.26.4
+numpy<2.0
 git+https://github.com/THGLab/NewtonNet.git@HessianCalculator#egg=NewtonNet
 
 git+https://github.com/ACEsuit/mace.git#egg=mace_torch
