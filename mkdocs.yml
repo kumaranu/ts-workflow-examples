@@ -1,7 +1,7 @@
-site_name: ts-workflow examples
+site_name: ts_workflow_examples
 site_author: YourName
 site_description: >-
-  This is the ts-workflow examples package!
+  This is the ts_workflow_examples package!
 nav:
   - Home: index.md
   - Overview:
@@ -33,7 +33,7 @@ nav:
       - example_docs/about/conduct.md
       - example_docs/about/license.md
 
-repo_url: https://github.com/Quantum-Accelerators/ts-workflow examples/
+repo_url: https://github.com/Quantum-Accelerators/ts_workflow_examples/
 edit_uri: blob/main/docs/
 
 theme:
