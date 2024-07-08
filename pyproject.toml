@@ -3,7 +3,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ts-workflow-examples"
+name = "ts_workflow_examples"
 description="A Python package description goes here."
 version = "0.0.1"
 readme = "README.md"
@@ -47,7 +47,7 @@ changelog = "https://github.com/Quantum-Accelerators/ts-workflow-examples/blob/m
 # ts-workflow-examples = ["py.typed"]
 
 [tool.pyright]
-include = ["ts-workflow-examples"]
+include = ["ts_workflow_examples"]
 exclude = ["**/__pycache__"]
 
 [tool.pytest.ini_options]
@@ -137,7 +137,7 @@ lint.unfixable = [
   "F841", # Removes unused variables
 ]
 lint.pydocstyle.convention = "numpy"
-lint.isort.known-first-party = ["ts-workflow-examples"]
+lint.isort.known-first-party = ["ts_workflow_examples"]
 lint.isort.required-imports = ["from __future__ import annotations"]
 extend-include = ["*.ipynb"]
 
