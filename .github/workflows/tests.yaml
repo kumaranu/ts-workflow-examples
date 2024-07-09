@@ -44,4 +44,13 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.xml  # Adjust path to your coverage report if needed
+          flags: unittests
+          name: codecov-ubuntu  # Optional name for the upload
           fail_ci_if_error: true
+          directory: ./  # Adjust if the coverage file is in a different directory
+          override_branch: ${{ github.head_ref || github.ref_name }}
+          override_commit: ${{ github.sha }}
+          override_pr: ${{ github.event.number }}
+          repository: ts-workflow-examples/ts_workflow_examples
