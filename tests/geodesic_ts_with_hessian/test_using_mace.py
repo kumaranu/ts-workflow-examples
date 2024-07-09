@@ -46,5 +46,5 @@ def test_geodesic_ts_hess_irc_mace(setup_test_environment):
         device='cpu',
     )
     mlcalculator.calculate(reactant)
-    print('Done with energy calc!!!!!')
+    print('Done with energy calc!!!!')
     assert 4 == 4
