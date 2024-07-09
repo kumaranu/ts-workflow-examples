@@ -18,7 +18,7 @@ def setup_test_environment(tmp_path):
 
     return reactant, product
 
-@pytest.mark.skip()
+
 def test_geodesic_ts_hess_irc_newtonnet(setup_test_environment):
     reactant, product = setup_test_environment
 
