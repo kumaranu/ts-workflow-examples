@@ -34,3 +34,17 @@ def test_geodesic_ts_hess_irc_mace(setup_test_environment):
 
     # Assertions
     assert len(jobs) == 4
+    from newtonnet.utils.ase_interface import MLAseCalculator
+
+    settings.NEWTONNET_MODEL_PATH = project_root / "tests" / "best_model_state.tar"
+    settings.NEWTONNET_CONFIG_PATH = project_root / "tests" / "config0.yml"
+    mlcalculator = MLAseCalculator(
+        model_path=settings.NEWTONNET_MODEL_PATH,
+        settings_path=settings.NEWTONNET_CONFIG_PATH,
+        hess_method='autograd',
+        disagreement='std',
+        device='cpu',
+    )
+    mlcalculator.calculate(reactant)
+    print('Done with energy calc!!!!!')
+    
