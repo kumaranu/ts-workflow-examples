@@ -58,7 +58,7 @@ if __name__ == "__main__":
     settings = get_settings()
     settings.CHECK_CONVERGENCE = False
     
-    # Calculation and optimization keyword arguments
+    # ASE Calculator keyword arguments
     calc_kwargs = {
     }
 
