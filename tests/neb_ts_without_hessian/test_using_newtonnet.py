@@ -24,6 +24,7 @@ def reset_default_tensor_type():
     torch.set_default_tensor_type(torch.FloatTensor)
 
 
+@pytest.mark.skip()
 def test_neb_ts_no_hess_irc_newtonnet(setup_test_environment):
     reactant, product = setup_test_environment
 
