@@ -1,6 +1,8 @@
 import os
 import pytest
 import logging
+
+import torch
 from ase.io import read
 from pathlib import Path
 from quacc import get_settings
@@ -17,6 +19,11 @@ def setup_test_environment(tmp_path):
     product = read(project_root / "tests" / '000_P.xyz')
 
     return reactant, product
+
+
+@pytest.fixture(autouse=True)
+def reset_default_tensor_type():
+    torch.set_default_tensor_type(torch.FloatTensor)
 
 
 def test_geodesic_ts_hess_irc_newtonnet(setup_test_environment):

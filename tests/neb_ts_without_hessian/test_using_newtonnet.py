@@ -1,3 +1,4 @@
+import torch
 import pytest
 import logging
 from ase.io import read
@@ -16,6 +17,11 @@ def setup_test_environment(tmp_path):
     product = read(project_root / "tests" / '000_P.xyz')
 
     return reactant, product
+
+
+@pytest.fixture(autouse=True)
+def reset_default_tensor_type():
+    torch.set_default_tensor_type(torch.FloatTensor)
 
 
 def test_neb_ts_no_hess_irc_newtonnet(setup_test_environment):
