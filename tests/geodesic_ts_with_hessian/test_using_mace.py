@@ -17,7 +17,7 @@ def setup_test_environment(tmp_path):
 
     return reactant, product
 
-pytest.mark.skip()
+
 def test_geodesic_ts_hess_irc_mace(setup_test_environment):
     reactant, product = setup_test_environment
     # Create mock jobs
@@ -30,21 +30,7 @@ def test_geodesic_ts_hess_irc_mace(setup_test_environment):
     settings = get_settings()
     settings.CHECK_CONVERGENCE = False
 
-    #jobs = geodesic_ts_hess_irc_mace(reactant, product, calc_kwargs, logger)
+    jobs = geodesic_ts_hess_irc_mace(reactant, product, calc_kwargs, logger)
 
     # Assertions
-    #assert len(jobs) == 4
-    from newtonnet.utils.ase_interface import MLAseCalculator
-
-    settings.NEWTONNET_MODEL_PATH = project_root / "tests" / "best_model_state.tar"
-    settings.NEWTONNET_CONFIG_PATH = project_root / "tests" / "config0.yml"
-    mlcalculator = MLAseCalculator(
-        model_path=settings.NEWTONNET_MODEL_PATH,
-        settings_path=settings.NEWTONNET_CONFIG_PATH,
-        hess_method='autograd',
-        disagreement='std',
-        device='cpu',
-    )
-    mlcalculator.calculate(reactant)
-    print('Done with energy calc!!!!')
-    assert 4 == 4
+    assert len(jobs) == 4
