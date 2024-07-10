@@ -39,9 +39,9 @@ docs = [
 ]
 
 [project.urls]
-repository = "https://github.com/Quantum-Accelerators/ts-workflow-examples"
-documentation = "https://quantum-accelerators.github.io/ts-workflow-examples/"
-changelog = "https://github.com/Quantum-Accelerators/ts-workflow-examples/blob/main/CHANGELOG.md"
+repository = "https://github.com/kumaranu/ts-workflow-examples"
+documentation = "https://kumaranu.github.io/ts-workflow-examples/"
+changelog = "https://github.com/kumaranu/ts-workflow-examples/blob/main/CHANGELOG.md"
 
 # [tool.setuptools.package-data]
 # ts-workflow-examples = ["py.typed"]
