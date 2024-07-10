@@ -11,7 +11,6 @@ from ts_workflow_examples.neb_ts_with_hessian.using_newtonnet import neb_ts_hess
 project_root = Path(__file__).resolve().parents[2]
 
 
-@pytest.fixture()
 def setup_test_environment(tmp_path):
     reactant = read(project_root / "tests" / '000_R.xyz')
     product = read(project_root / "tests" / '000_P.xyz')

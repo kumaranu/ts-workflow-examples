@@ -20,7 +20,6 @@ def setup_test_environment(tmp_path):
     return reactant, product
 
 
-@pytest.mark.skip()
 @pytest.fixture(autouse=True)
 def reset_default_tensor_type():
     torch.set_default_tensor_type(torch.FloatTensor)
