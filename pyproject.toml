@@ -8,7 +8,7 @@ description="A Python package description goes here."
 version = "0.0.1"
 readme = "README.md"
 license = { text = "BSD-3" }
-authors = [{ name = "YourName", email = "YourName@email.com" }]
+authors = [{ name = "Anup Kumar", email = "kumaranu@lbl.gov" }]
 keywords = ["MyKeyword1", "MyKeyword2"]
 classifiers = [
     "Development Status :: 3 - Alpha",
