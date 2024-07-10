@@ -55,6 +55,5 @@ Note: Ensure that you are in the correct directory as the paths inside the input
 This will allow the inputs and ML models provided with the repository to run correctly.
 
 ## 4. Additional Resources
-    [NewtonNet](https://github.com/THGLab/NewtonNet) GitHub Repository
-    [MACE](https://github.com/ACEsuit/mace/tree/main) GitHub Repository
-    
+[NewtonNet](https://github.com/THGLab/NewtonNet) and [MACE](https://github.com/ACEsuit/mace/tree/main) GitHub
+repositories.
