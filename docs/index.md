@@ -1,5 +1,7 @@
-# ts-workflow examples
+# ts-workflow-examples
 
-Welcome to the documentation for the `ts-workflow examples` code! Here you will find everything you need to get started with your own Python package.
+Welcome to the documentation for the `ts-workflow-examples` code!
 
-**Check out the corresponding ⭐[YouTube tutorial](https://www.youtube.com/watch?v=th2CqJ6oBuM)⭐ for a video overview!**
+This package provides workflows that can be directly used to produce state-of-the-art transition state calculations.
+The examples provided here utilize two machine learning models, [NewtonNet](https://github.com/THGLab/NewtonNet) and
+[MACE](https://github.com/ACEsuit/mace/tree/main).
