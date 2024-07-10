@@ -1,12 +1,47 @@
+import os
+import toml
+import glob
+import shutil
 import logging
 from ase.io import read
-import os, toml, glob, shutil
+from ase.atoms import Atoms
 from quacc import get_settings
 from quacc import strip_decorator
+from typing import List, Dict, Any
 from quacc.recipes.newtonnet.ts import ts_job, irc_job, geodesic_job
 
 
-def geodesic_ts_hess_irc_newtonnet(reactant, product, calc_kwargs1, calc_kwargs2, logger, clean_up=True):
+def geodesic_ts_hess_irc_newtonnet(
+        reactant: Atoms,
+        product: Atoms,
+        calc_kwargs1: Dict[str, Any],
+        calc_kwargs2: Dict[str, Any],
+        logger: logging.Logger,
+        clean_up: bool = True,
+) -> List[Dict[str, Any]]:
+    """
+    Perform geodesic, transition state, and intrinsic reaction coordinate (IRC) calculations using NewtonNet.
+
+    Parameters
+    ----------
+    reactant : Atoms
+        The reactant structure.
+    product : Atoms
+        The product structure.
+    calc_kwargs1 : dict
+        Keyword arguments for the ASE calculator for the geodesic and IRC jobs.
+    calc_kwargs2 : dict
+        Keyword arguments for the ASE calculator for the TS job with custom Hessian.
+    logger : logging.Logger
+        Logger for logging information.
+    clean_up : bool, optional
+        Whether to clean up raw files after completion, by default True.
+
+    Returns
+    -------
+    List[Dict[str, Any]]
+        List containing results from geodesic, TS, and IRC jobs.
+    """
     # Create NEB job
     job1 = strip_decorator(geodesic_job)(reactant, product, calc_kwargs=calc_kwargs1)
     logger.info("Created Geodesic job.")

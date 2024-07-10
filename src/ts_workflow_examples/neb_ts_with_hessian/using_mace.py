@@ -1,12 +1,45 @@
+import os
+import toml
+import glob
+import shutil
 import logging
 from ase.io import read
-import os, toml, glob, shutil
+from ase.atoms import Atoms
 from quacc import get_settings
 from quacc import strip_decorator
+from typing import List, Dict, Any
 from quacc.recipes.mace.ts import ts_job, irc_job, neb_job
 
 
-def neb_ts_hess_irc_mace(reactant, product, calc_kwargs1, logger, clean_up=True):
+def neb_ts_hess_irc_mace(
+        reactant: Atoms,
+        product: Atoms,
+        calc_kwargs1: Dict[str, Any],
+        logger: logging.Logger,
+        clean_up: bool = True,
+) -> List[Dict[str, Any]]:
+    """
+    Perform NEB, transition state (TS) with custom Hessian, and intrinsic reaction coordinate (IRC)
+    calculations using MACE.
+
+    Parameters
+    ----------
+    reactant : Atoms
+        The reactant structure.
+    product : Atoms
+        The product structure.
+    calc_kwargs1 : dict
+        Keyword arguments for the ASE calculator.
+    logger : logging.Logger
+        Logger for logging information.
+    clean_up : bool, optional
+        Whether to clean up raw files after completion, by default True.
+
+    Returns
+    -------
+    List[Dict[str, Any]]
+        List containing results from NEB, TS, and IRC jobs.
+    """
     # Create NEB job
     job1 = strip_decorator(neb_job)(reactant, product, calc_kwargs=calc_kwargs1)
     logger.info("Created NEB job.")
@@ -68,4 +101,3 @@ if __name__ == "__main__":
     print('\n\n', job2)
     print('\n\n', job3)
     print('\n\n', job4)
-
