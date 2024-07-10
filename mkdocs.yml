@@ -1,39 +1,29 @@
 site_name: ts_workflow_examples
-site_author: YourName
+site_author: Anup Kumar
 site_description: >-
-  This is the ts_workflow_examples package!
+  This is the ts_workflow_examples package! It contains workflows to run transition state calculations.
+
 nav:
   - Home: index.md
-  - Overview:
-      - example_docs/intro/why.md
-      - example_docs/intro/resources.md
-  - Setup:
-      - example_docs/setup/prep.md
-      - example_docs/setup/name.md
-      - example_docs/setup/basics.md
-  - Installation:
-      - example_docs/installation/pyproject.md
-      - example_docs/installation/install.md
-  - Code:
-      - example_docs/code/source.md
-      - example_docs/code/hints.md
-      - example_docs/code/tests.md
-  - Documentation:
-      - example_docs/mkdocs/docs.md
-      - example_docs/mkdocs/build.md
-  - GitHub and CI:
-      - example_docs/github/commits.md
-      - example_docs/github/workflows.md
-  - Miscellaneous:
-      - example_docs/other/linting.md
-      - example_docs/other/apps.md
-  - Code Documentation: reference/ # keep me!
+  - Code Documentation:
+      - Geodesic TS with Hessian:
+          - Using Mace: reference/ts_workflow_examples/geodesic_ts_with_hessian/using_mace.md
+          - Using NewtonNet: reference/ts_workflow_examples/geodesic_ts_with_hessian/using_newtonnet.md
+      - Geodesic TS without Hessian:
+          - Using Mace: reference/ts_workflow_examples/geodesic_ts_without_hessian/using_mace.md
+          - Using NewtonNet: reference/ts_workflow_examples/geodesic_ts_without_hessian/using_newtonnet.md
+      - NEB TS with Hessian:
+          - Using Mace: reference/ts_workflow_examples/neb_ts_with_hessian/using_mace.md
+          - Using NewtonNet: reference/ts_workflow_examples/neb_ts_with_hessian/using_newtonnet.md
+      - NEB TS without Hessian:
+          - Using Mace: reference/ts_workflow_examples/neb_ts_without_hessian/using_mace.md
+          - Using NewtonNet: reference/ts_workflow_examples/neb_ts_without_hessian/using_newtonnet.md
   - About:
-      - example_docs/about/changelog.md
-      - example_docs/about/conduct.md
-      - example_docs/about/license.md
+      - changelog.md
+      - conduct.md
+      - license.md
 
-repo_url: https://github.com/Quantum-Accelerators/ts_workflow_examples/
+repo_url: https://github.com/kumaranu/ts_workflow_examples/
 edit_uri: blob/main/docs/
 
 theme:
