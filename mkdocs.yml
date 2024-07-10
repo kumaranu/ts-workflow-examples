@@ -1,10 +1,12 @@
-site_name: ts_workflow_examples
+site_name: Transition state workflow examples
 site_author: Anup Kumar
 site_description: >-
   This is the ts_workflow_examples package! It contains workflows to run transition state calculations.
 
 nav:
   - Home: index.md
+  - Installation: installation.md
+  - Usage: usage.md
   - Code Documentation:
       - Geodesic TS with Hessian:
           - Using Mace: reference/ts_workflow_examples/geodesic_ts_with_hessian/using_mace.md
@@ -19,9 +21,10 @@ nav:
           - Using Mace: reference/ts_workflow_examples/neb_ts_without_hessian/using_mace.md
           - Using NewtonNet: reference/ts_workflow_examples/neb_ts_without_hessian/using_newtonnet.md
   - About:
-      - changelog.md
-      - conduct.md
-      - license.md
+      - CHANGELOG.md
+      - CODE_OF_CONDUCT.md
+      - LICENSE.md
+      - reference/SUMMARY.md
 
 repo_url: https://github.com/kumaranu/ts_workflow_examples/
 edit_uri: blob/main/docs/
@@ -48,6 +51,7 @@ theme:
   palette:
     primary: orange
     scheme: slate
+
 
 markdown_extensions:
   - abbr
