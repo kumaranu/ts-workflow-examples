@@ -1,7 +1,13 @@
-import os
 import pytest
-import logging
+import numpy as np
 
+
+@pytest.fixture(scope="session", autouse=True)
+def set_seed():
+    np.random.seed(42)  # noqa: NPY002
+
+
+import logging
 import torch
 from ase.io import read
 from pathlib import Path
@@ -49,4 +55,20 @@ def test_geodesic_ts_hess_irc_newtonnet(setup_test_environment):
     jobs = geodesic_ts_hess_irc_newtonnet(reactant, product, calc_kwargs1, calc_kwargs2, logger)
 
     # Assertions
-    assert len(jobs) == 4
+    assert jobs[0]['relax_reactant']['results']['energy'] == pytest.approx(-68.26889038085938, 1e-6)
+    assert jobs[0]['relax_reactant']['results']['forces'][0, 1] == pytest.approx(0.0006616527098231018, 1e-2)
+
+    assert jobs[0]['relax_product']['results']['energy'] == pytest.approx(-63.780540466308594, 1e-6)
+    assert jobs[0]['relax_product']['results']['forces'][0, 1] == pytest.approx(-0.0018400131957605481, 1e-2)
+
+    # geodesic output
+    assert jobs[0]['highest_e_atoms'].get_potential_energy() == pytest.approx(-61.53276824951172, 1e-6)
+
+    # transition state optimization output
+    assert jobs[1]['trajectory_results'][-1]['energy'] == pytest.approx(-63.505672454833984, 1e-6)
+
+    # IRC forward output
+    assert jobs[2]['trajectory_results'][-1]['energy'] == pytest.approx(-67.261962890625, 1e-6)
+
+    # IRC reverse output
+    assert jobs[3]['trajectory_results'][-1]['energy'] == pytest.approx(-68.01041412353516, 1e-6)
