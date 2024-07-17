@@ -14,6 +14,7 @@ from quacc.recipes.mace.ts import ts_job, irc_job, neb_job
 def neb_ts_hess_irc_mace(
         reactant: Atoms,
         product: Atoms,
+        run_neb_kwargs: Dict[str, Any],
         calc_kwargs1: Dict[str, Any],
         logger: logging.Logger,
         clean_up: bool = True,
@@ -28,6 +29,8 @@ def neb_ts_hess_irc_mace(
         The reactant structure.
     product : Atoms
         The product structure.
+    run_neb_kwargs : dict
+        Keyword arguments for the ASE's nudged elastic band function.
     calc_kwargs1 : dict
         Keyword arguments for the ASE calculator.
     logger : logging.Logger
@@ -41,19 +44,35 @@ def neb_ts_hess_irc_mace(
         List containing results from NEB, TS, and IRC jobs.
     """
     # Create NEB job
-    job1 = strip_decorator(neb_job)(reactant, product, calc_kwargs=calc_kwargs1)
+    job1 = strip_decorator(neb_job)(
+        reactant,
+        product,
+        run_neb_kwargs=run_neb_kwargs,
+        **calc_kwargs1,
+    )
     logger.info("Created NEB job.")
 
     # Create TS job with custom Hessian
-    job2 = strip_decorator(ts_job)(job1['neb_results']['highest_e_atoms'], use_custom_hessian=True)
+    job2 = strip_decorator(ts_job)(
+        job1['neb_results']['highest_e_atoms'],
+        use_custom_hessian=True,
+    )
     logger.info("Created TS job with custom Hessian.")
 
     # Create IRC job in forward direction
-    job3 = strip_decorator(irc_job)(job2['atoms'], direction='forward', **calc_kwargs1)
+    job3 = strip_decorator(irc_job)(
+        job2['atoms'],
+        direction='forward',
+        **calc_kwargs1,
+    )
     logger.info("Created IRC job in forward direction.")
 
     # Create IRC job in reverse direction
-    job4 = strip_decorator(irc_job)(job2['atoms'], direction='reverse', **calc_kwargs1)
+    job4 = strip_decorator(irc_job)(
+        job2['atoms'],
+        direction='reverse',
+        **calc_kwargs1,
+    )
     logger.info("Created IRC job in reverse direction.")
 
     logger.info("All jobs executed successfully.")
@@ -95,8 +114,16 @@ if __name__ == "__main__":
     calc_kwargs1 = {
         'hess_method': None,
     }
-
-    job1, job2, job3, job4 = neb_ts_hess_irc_mace(reactant, product, calc_kwargs1, logger)
+    run_neb_kwargs = {
+        'max_steps': 2,
+    }
+    job1, job2, job3, job4 = neb_ts_hess_irc_mace(
+        reactant,
+        product,
+        run_neb_kwargs,
+        calc_kwargs1,
+        logger
+    )
     print('\n\n', job1)
     print('\n\n', job2)
     print('\n\n', job3)
