@@ -14,6 +14,7 @@ from quacc.recipes.newtonnet.ts import ts_job, irc_job, neb_job
 def neb_ts_hess_irc_newtonnet(
         reactant: Atoms,
         product: Atoms,
+        run_neb_kwargs: Dict[str, Any],
         calc_kwargs1: Dict[str, Any],
         calc_kwargs2: Dict[str, Any],
         logger: logging.Logger,
@@ -29,6 +30,8 @@ def neb_ts_hess_irc_newtonnet(
         The reactant structure.
     product : Atoms
         The product structure.
+    run_neb_kwargs : dict
+        Keyword arguments for the ASE's nudged elastic band function.
     calc_kwargs1 : dict
         Keyword arguments for the ASE calculator for NEB and IRC jobs.
     calc_kwargs2 : dict
@@ -44,7 +47,12 @@ def neb_ts_hess_irc_newtonnet(
         List containing results from NEB, TS, and IRC jobs.
     """
     # Create NEB job
-    job1 = strip_decorator(neb_job)(reactant, product, calc_kwargs=calc_kwargs1)
+    job1 = strip_decorator(neb_job)(
+        reactant,
+        product,
+        run_neb_kwargs=run_neb_kwargs,
+        calc_kwargs=calc_kwargs1,
+    )
     logger.info("Created NEB job.")
 
     # Create TS job with custom Hessian
@@ -105,8 +113,17 @@ if __name__ == "__main__":
     calc_kwargs2 = {
         'hess_method': 'autograd',
     }
-
-    job1, job2, job3, job4 = neb_ts_hess_irc_newtonnet(reactant, product, calc_kwargs1, calc_kwargs2, logger)
+    run_neb_kwargs = {
+        'max_steps': 2,
+    }
+    job1, job2, job3, job4 = neb_ts_hess_irc_newtonnet(
+        reactant,
+        product,
+        run_neb_kwargs,
+        calc_kwargs1,
+        calc_kwargs2,
+        logger,
+    )
     print('\n\n', job1)
     print('\n\n', job2)
     print('\n\n', job3)
