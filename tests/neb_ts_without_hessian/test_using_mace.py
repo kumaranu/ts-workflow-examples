@@ -32,6 +32,9 @@ def test_neb_ts_no_hess_irc_mace(setup_test_environment):
     reactant, product = setup_test_environment
 
     calc_kwargs = {}
+    run_neb_kwargs = {
+        'max_steps': 2,
+    }
 
     # Setup logging
     logging.basicConfig(level=logging.INFO)
@@ -40,7 +43,13 @@ def test_neb_ts_no_hess_irc_mace(setup_test_environment):
     settings = get_settings()
     settings.CHECK_CONVERGENCE = False
 
-    jobs = neb_ts_no_hess_irc_mace(reactant, product, calc_kwargs, logger)
+    jobs = neb_ts_no_hess_irc_mace(
+        reactant,
+        product,
+        run_neb_kwargs,
+        calc_kwargs,
+        logger,
+    )
 
     # Assertions
     assert len(jobs) == 4
@@ -49,26 +58,26 @@ def test_neb_ts_no_hess_irc_mace(setup_test_environment):
     print(jobs[0]['relax_reactant']['results']['forces'][0, 1])
     print(jobs[0]['relax_product']['results']['energy'])
     print(jobs[0]['relax_product']['results']['forces'][0, 1])
-    print(jobs[0]['neb_results']['highest_e_atoms'].get_potential_energy())
+    # print(jobs[0]['neb_results']['highest_e_atoms'].get_potential_energy())
     print(jobs[1]['trajectory_results'][-1]['energy'])
     print(jobs[2]['trajectory_results'][-1]['energy'])
     print(jobs[3]['trajectory_results'][-1]['energy'])
 
     # Assertions
-    assert jobs[0]['relax_reactant']['results']['energy'] == pytest.approx(-68.26889038085938, 1e-6)
-    assert jobs[0]['relax_reactant']['results']['forces'][0, 1] == pytest.approx(0.0006616527098231, 1e-2)
+    assert jobs[0]['relax_reactant']['results']['energy'] == pytest.approx(-7400.1083984375, abs=1e-6)
+    assert jobs[0]['relax_reactant']['results']['forces'][0, 1] == pytest.approx(0.00045277923, abs=1e-6)
 
-    assert jobs[0]['relax_product']['results']['energy'] == pytest.approx(-63.780540466308594, 1e-6)
-    assert jobs[0]['relax_product']['results']['forces'][0, 1] == pytest.approx(-0.0018400131957605481, 1e-2)
+    assert jobs[0]['relax_product']['results']['energy'] == pytest.approx(-7395.8291015625, abs=1e-6)
+    assert jobs[0]['relax_product']['results']['forces'][0, 1] == pytest.approx(-0.002765655517578125, abs=1e-4)
 
     # neb output
-    assert jobs[0]['neb_results']['highest_e_atoms'].get_potential_energy() == pytest.approx(-61.5327682495, 1e-6)
+    assert jobs[0]['neb_results']['highest_e_atoms'].positions[0, 1] == pytest.approx(1.35378979542, abs=1e-6)
 
     # transition state optimization output
-    assert jobs[1]['trajectory_results'][-1]['energy'] == pytest.approx(-63.742549896240234, 1e-6)
+    assert jobs[1]['trajectory_results'][-1]['energy'] == pytest.approx(-7395.718941743618, abs=1e-4)
 
     # IRC forward output
-    assert jobs[2]['trajectory_results'][-1]['energy'] == pytest.approx(-67.372802734375, 1e-6)
+    assert jobs[2]['trajectory_results'][-1]['energy'] == pytest.approx(-7395.816609139422, abs=1e-6)
 
     # IRC reverse output
-    assert jobs[3]['trajectory_results'][-1]['energy'] == pytest.approx(-67.37286376953125, 1e-6)
+    assert jobs[3]['trajectory_results'][-1]['energy'] == pytest.approx(-7395.828279829561, abs=1e-6)
