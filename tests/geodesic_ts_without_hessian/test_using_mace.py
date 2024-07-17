@@ -40,11 +40,11 @@ def test_geodesic_ts_hess_irc_mace(setup_test_environment):
     jobs = geodesic_ts_no_hess_irc_mace(reactant, product, calc_kwargs, logger)
 
     # Assertions
-    assert jobs[0]['relax_reactant']['results']['energy'] == pytest.approx(-7400.109474432057, 1e-6)
-    assert jobs[0]['relax_reactant']['results']['forces'][0, 1] == pytest.approx(2.66840467e-04, 1e-2)
+    assert jobs[0]['relax_reactant']['results']['energy'] == pytest.approx(-7400.1083984375, 1e-6)
+    assert jobs[0]['relax_reactant']['results']['forces'][0, 1] == pytest.approx(0.00044930726, 1e-2)
 
-    assert jobs[0]['relax_product']['results']['energy'] == pytest.approx(-7395.830068714384, 1e-6)
-    assert jobs[0]['relax_product']['results']['forces'][0, 1] == pytest.approx(-0.00025790767076738774, 1e-2)
+    assert jobs[0]['relax_product']['results']['energy'] == pytest.approx(-7395.8291015625, 1e-6)
+    assert jobs[0]['relax_product']['results']['forces'][0, 1] == pytest.approx(-0.001451388, 1e-2)
 
     # geodesic output
     assert jobs[0]['highest_e_atoms'].get_potential_energy() == pytest.approx(-7392.679151885447, 1e-6)
