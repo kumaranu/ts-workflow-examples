@@ -9,7 +9,7 @@ geodesic-interpolate @ git+https://github.com/virtualzx-nad/geodesic-interpolate
 
 Sella==2.3.4
 ase==3.23.0
-jobflow==0.1.17
+jobflow==0.1.18
 jobflow-remote==0.1.2
 toml==0.10.2
 maggma==0.68.6
