@@ -12,4 +12,4 @@ ase==3.23.0
 jobflow==0.1.17
 jobflow-remote==0.1.2
 toml==0.10.2
-maggma==0.68.6
+maggma==0.69.1
